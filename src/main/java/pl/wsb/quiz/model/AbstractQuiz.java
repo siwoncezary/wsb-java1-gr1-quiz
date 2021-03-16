@@ -1,7 +1,9 @@
 package pl.wsb.quiz.model;
 
 import lombok.Builder;
+import lombok.ToString;
 
+@ToString
 abstract public class AbstractQuiz {
     final String question;
 
