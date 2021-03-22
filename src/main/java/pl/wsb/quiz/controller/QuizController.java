@@ -5,39 +5,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.wsb.quiz.model.AbstractQuiz;
-import pl.wsb.quiz.model.MultiChoiceQuiz;
-import pl.wsb.quiz.model.OpenQuiz;
+import pl.wsb.quiz.entity.Quiz;
 import pl.wsb.quiz.model.SimpleQuiz;
+import pl.wsb.quiz.service.QuizService;
+import pl.wsb.quiz.service.QuizServiceJpa;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class QuizController {
-    AbstractQuiz quiz;
+    final QuizService quizService;
+
+    public QuizController(QuizServiceJpa quizService) {
+        this.quizService = quizService;
+    }
 
     @GetMapping("/quiz/{id}")
     public String quiz(@PathVariable int id) {
-        if (id == 1) {
-            quiz = MultiChoiceQuiz.builder()
-                    .question("Kiedy powstała Java?")
-                    .answers(List.of("1998", "2000", "1993", "2005"))
-                    .validAnswers(List.of("1993"))
-                    .build();
-        }
-        if (id == 2){
-            quiz = OpenQuiz.builder()
-                    .question("Podaj operator tworzenia obiektów")
-                    .validAnswer("new")
-                    .build();
-        }
-        return quiz.toString();
+        Optional<Quiz> optionalQuiz = quizService.findById(id);
+        return optionalQuiz.isPresent() ? optionalQuiz.get().toString() : "Brak takiego quizu!";
     }
 
-    @GetMapping("/quiz/answer")
-    public String answerForQuiz(@RequestParam String answer){
-        return quiz.isValidAnswer(answer.split(" ")) ? "Ok": "Zla odpowiedź";
+    @GetMapping("/quiz")
+    public String answerForQuiz(@RequestParam String category){
+        return quizService.findByCategory(category).toString();
     }
 
     @GetMapping("/quiz/json")
