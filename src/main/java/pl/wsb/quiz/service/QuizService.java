@@ -9,4 +9,5 @@ public interface QuizService {
     Optional<Quiz> findById(long id);
     List<Quiz> findAll();
     List<Quiz> findByCategory(String category);
+    boolean saveAnswer(long quizId, long userId, String answers);
 }
