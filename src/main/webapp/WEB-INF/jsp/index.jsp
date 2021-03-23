@@ -1,13 +1,14 @@
-<%@page language="java" contentType="text/html; UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hello ${name}!</title>
+    <title>Quiz</title>
 </head>
 <body>
-<h2 class="hello-title">Hello ${name}!</h2>
-<a href="/basic">Basic</a>
+<h2 class="hello-title">Aplikacja Quiz</h2>
+<a href="/fill">Dodaj nowy quiz</a><br>
+<a href="/quizzes">Wyświetl wszystkie quizy</a><br>
+<a href="/answer?id=1">Wypełnij quiz 1</a><br>
 </body>
 </html>

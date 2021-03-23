@@ -54,6 +54,11 @@ public class QuizServiceJpa implements QuizService{
         return false;
     }
 
+    @Override
+    public void save(Quiz quiz) {
+        quizRepository.save(quiz);
+    }
+
     private boolean isValidAnswer(Quiz quiz, String answers){
         String[] valid = quiz.getAnswers().split("\n");
         String[] userAnswers = answers.split("\n");

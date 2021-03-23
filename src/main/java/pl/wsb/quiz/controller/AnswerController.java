@@ -2,6 +2,7 @@ package pl.wsb.quiz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.wsb.quiz.entity.UserAnswer;
@@ -22,7 +23,7 @@ public class AnswerController {
         this.quizRepository = quizRepository;
     }
 
-    @GetMapping("/answer")
+    @PostMapping("/answer")
     public String answer(@RequestParam long user_id, @RequestParam long quiz_id, String answer){
         //answerRepository.save(new UserAnswer(0, answer, quizRepository.findById(quiz_id).get(), userRepository.findById(user_id).get()));
         return "Answer";

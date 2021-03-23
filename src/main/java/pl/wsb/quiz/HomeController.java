@@ -14,17 +14,8 @@ import javax.transaction.Transactional;
 
 @Controller
 public class HomeController {
-    final QuizRepository repository;
-    @Autowired
-    public HomeController(QuizRepository repository, EntityManager entityManager) {
-        this.repository = repository;
-    }
-
-
     @GetMapping("/")
-    public String hello(Model model, @RequestParam(value = "name", required = false, defaultValue = "World") String name) {
-        System.out.println("INDEX");
-        model.addAttribute("name", name);
+    public String home() {
         return "index";
     }
 
